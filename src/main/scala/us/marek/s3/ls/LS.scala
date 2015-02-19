@@ -43,8 +43,7 @@ object LS extends App {
       println(s"Got ${newStats.objectCount} objects and ${newStats.sizeBytes} bytes so far")
 
       client.listNextBatchOfObjects(listing) match {
-        case next if next.getObjectSummaries.size > 0 =>
-          getPartialStats(newStats, next)
+        case next if next.getObjectSummaries.size > 0 => getPartialStats(newStats, next)
         case _ => newStats
       }
     }
