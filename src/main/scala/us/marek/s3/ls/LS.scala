@@ -21,12 +21,8 @@ object LS extends App {
     sys.error("Usage: LS accessKey secretKey bucketName")
   }
 
-  case class Stats(sizeBytes: Long, objectCount: Long) {
-
-    def +(other: Stats) = Stats(this.sizeBytes + other.sizeBytes, this.objectCount + other.objectCount)
-  }
-
-
+  case class Stats(sizeBytes: Long, objectCount: Long)
+  
   def getStats(accessKey: String, secretKey: String, bucketName: String, maxKeysAtATime: Int = 1000): Stats = {
 
     val client = new AmazonS3Client(new BasicAWSCredentials(accessKey, secretKey))
@@ -36,9 +32,9 @@ object LS extends App {
     @tailrec
     def getPartialStats(stats: Stats, listing: ObjectListing): Stats = {
 
-      val newStats = listing.getObjectSummaries.foldLeft(Stats(0L, 0L)) {
+      val newStats = listing.getObjectSummaries.foldLeft(stats) {
         case (Stats(size, count), summary) => Stats(size + summary.getSize, count + 1)
-      } + stats
+      }
 
       println(s"Got ${newStats.objectCount} objects and ${newStats.sizeBytes} bytes so far")
 
