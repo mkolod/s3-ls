@@ -1,7 +1,9 @@
+package us.marek.s3.ls
+
 import com.amazonaws.auth.BasicAWSCredentials
-import com.amazonaws.services.s3
-import com.amazonaws.services.s3.model.{ObjectListing, ListObjectsRequest}
-import s3.AmazonS3Client
+import com.amazonaws.services.s3.AmazonS3Client
+import com.amazonaws.services.s3.model.{ListObjectsRequest, ObjectListing}
+
 import scala.annotation.tailrec
 import scala.collection.JavaConversions._
 
