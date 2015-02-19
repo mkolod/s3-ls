@@ -3,14 +3,9 @@ package us.marek.s3.ls
 import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.model.{ListObjectsRequest, ObjectListing}
-
 import shapeless._
-import syntax.std.traversable._
-import syntax.std.tuple._
-import syntax.typeable._
-import ops.hlist._
-import shapeless.Tuple
-import shapeless.Tuple._
+import shapeless.syntax.std.traversable._
+import shapeless.syntax.std.tuple._
 
 import scala.annotation.tailrec
 import scala.collection.JavaConversions._
