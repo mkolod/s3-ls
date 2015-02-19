@@ -4,6 +4,14 @@ import com.amazonaws.auth.BasicAWSCredentials
 import com.amazonaws.services.s3.AmazonS3Client
 import com.amazonaws.services.s3.model.{ListObjectsRequest, ObjectListing}
 
+import shapeless._
+import syntax.std.traversable._
+import syntax.std.tuple._
+import syntax.typeable._
+import ops.hlist._
+import shapeless.Tuple
+import shapeless.Tuple._
+
 import scala.annotation.tailrec
 import scala.collection.JavaConversions._
 
@@ -52,7 +60,9 @@ object LS extends App {
 
   val start = System.currentTimeMillis
 
-  val (accessKey, secretKey, bucketName) = args.take(3)
+  type S = String
+  val (accessKey, secretKey, bucketName) = args.toHList[S::S::S::HNil].get.tupled
+
   val stats = getStats(accessKey, secretKey, bucketName)
 
   val timeSecs = (System.currentTimeMillis - start) / 1000L
